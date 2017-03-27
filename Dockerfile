@@ -1,6 +1,6 @@
 # ssr-with-net-speeder
 
-FROM ubuntu:14.04.3
+FROM rastasheep/ubuntu-sshd
 MAINTAINER malaohu <tua@live.cn>
 RUN apt-get update && \
 apt-get clean
@@ -19,9 +19,10 @@ apt-get clean
 RUN apt-get install -y gcc && \
 apt-get clean
 
-RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git ssr
-RUN git clone https://github.com/snooda/net-speeder.git net-speeder
-WORKDIR net-speeder
+RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git /src/ssr
+RUN git clone https://github.com/snooda/net-speeder.git /src/net-speeder
+WORKDIR /src/net-speeder
+RUN chmod +x build.sh
 RUN sh build.sh
 
 RUN mv net_speeder /usr/local/bin/
