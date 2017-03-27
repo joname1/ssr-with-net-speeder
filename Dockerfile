@@ -2,33 +2,31 @@
 
 FROM ubuntu:14.04.3
 MAINTAINER malaohu <tua@live.cn>
+RUN apt-get update && \
+apt-get clean
+RUN apt-get install -y python && \
+apt-get clean
+RUN apt-get install -y python-pip && \
+apt-get clean
+RUN apt-get install -y python-m2crypto && \
+apt-get clean
+RUN apt-get install -y libnet1-dev && \
+apt-get clean
+RUN apt-get install -y libpcap0.8-dev && \
+apt-get clean
+RUN apt-get install -y git && \
+apt-get clean
+RUN apt-get install -y gcc && \
+apt-get clean
 
-#RUN apt-get update && \
-#apt-get clean  && \
-#apt-get install -y python python-pip && \
-#apt-get clean  && \
-#apt-get install -y python-m2crypto libnet1-dev libpcap0.8-dev && \
-#apt-get clean  && \
-#RUN apt-get install -y git gcc && \
-#RUN apt-get install -y git && \
-#apt-get clean
+RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git ssr
+RUN git clone https://github.com/snooda/net-speeder.git net-speeder
+WORKDIR net-speeder
+RUN sh build.sh
 
-#RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git ssr
-#RUN git clone https://github.com/snooda/net-speeder.git net-speeder
-#WORKDIR net-speeder
-#RUN sh build.sh
-
-#RUN mv net_speeder /usr/local/bin/
-#COPY entrypoint.sh /usr/local/bin/
-#RUN chmod +x /usr/local/bin/entrypoint.sh
-#RUN chmod +x /usr/local/bin/net_speeder
-
-# Start Net Speeder
-#CMD ["nohup /usr/local/bin/net_speeder venet0 \"ip\" >/dev/null 2>&1 &"]
-
-#Test 
-CMD ["ping www.baidu.com -c 5"]
-
-
+RUN mv net_speeder /usr/local/bin/
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/net_speeder
 # Configure container to run as an executable
-#ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
