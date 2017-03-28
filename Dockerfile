@@ -44,5 +44,5 @@ EXPOSE $SERVER_PORT/udp
 RUN echo "Start Info : -s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL" >> /src/log.log
 
 
-CMD "-s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL"
+CMD ["/usr/local/bin/entrypoint.sh","-s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL"]
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
