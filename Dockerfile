@@ -28,7 +28,5 @@ RUN chmod +x /usr/local/bin/start.sh
 
 EXPOSE 80
 EXPOSE 22
-EXPOSE $SERVER_PORT/tcp
-EXPOSE $SERVER_PORT/udp
 
 CMD    ["/usr/local/bin/start.sh"]
