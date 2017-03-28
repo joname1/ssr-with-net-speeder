@@ -29,7 +29,7 @@ RUN sh build.sh
 RUN mv net_speeder /usr/local/bin/
 RUN chmod +x /usr/local/bin/net_speeder
 
-RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git /src/ssr
+RUN git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git /src/ssr
 
 COPY start.sh /usr/local/bin/
 COPY entrypoint.sh /usr/local/bin/
@@ -40,6 +40,8 @@ EXPOSE 80
 EXPOSE 22
 EXPOSE $SERVER_PORT/tcp
 EXPOSE $SERVER_PORT/udp
+
+RUN echo "Start Info : -s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL"
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["-s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL"]
