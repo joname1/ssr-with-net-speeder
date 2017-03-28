@@ -22,7 +22,9 @@ RUN sh build.sh
 RUN mv net_speeder /usr/local/bin/
 RUN chmod +x /usr/local/bin/net_speeder
 
+COPY start.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/start.sh
+
 EXPOSE 22
 
-CMD    ["/usr/sbin/sshd", "-D"]
-CMD    ["nohup /usr/local/bin/net_speeder eth0 "ip" >/dev/null 2>&1 &", "-D"]
+CMD    ["/usr/local/bin/start.sh"]
