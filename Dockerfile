@@ -11,6 +11,8 @@ RUN echo 'root:root' |chpasswd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
+RUN apt-get install -y python python-pip python-m2crypto libnet1-dev libpcap0.8-dev git gcc 
+
 EXPOSE 22
 
 CMD    ["/usr/sbin/sshd", "-D"]
