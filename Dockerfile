@@ -2,13 +2,6 @@ FROM       ubuntu:14.04
 MAINTAINER malaohu<tua@live.cn>
 
 
-ENV SERVER_PORT 8989
-ENV PASSWORD    RUYO.net
-ENV METHOD      rc4-md5
-ENV PROTOCOL    auth_sha1
-ENV OBFS        http_simple
-
-
 RUN apt-get update
 #ssh
 RUN apt-get install -y openssh-server
@@ -43,6 +36,4 @@ EXPOSE $SERVER_PORT/udp
 
 RUN echo "Start Info : -s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL" >> /src/log.log
 
-
-CMD ["/usr/local/bin/entrypoint.sh","-s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL"]
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
