@@ -1,6 +1,14 @@
 FROM       ubuntu:14.04
 MAINTAINER malaohu<tua@live.cn>
 
+
+ENV SERVER_PORT 8989
+ENV PASSWORD    RUYO.net
+ENV METHOD      rc4-md5
+ENV PROTOCOL    auth_sha1
+ENV OBFS        http_simple
+
+
 RUN apt-get update
 #ssh
 RUN apt-get install -y openssh-server
@@ -28,5 +36,7 @@ RUN chmod +x /usr/local/bin/start.sh
 
 EXPOSE 80
 EXPOSE 22
+EXPOSE $SERVER_PORT/tcp
+EXPOSE $SERVER_PORT/udp
 
-CMD    ["/usr/local/bin/start.sh"]
+CMD    ["/usr/local/bin/start.sh",$SERVER_PORT,$PASSWORD,$METHOD,$PROTOCOL,$OBFS]
