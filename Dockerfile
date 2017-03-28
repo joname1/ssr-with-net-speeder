@@ -42,4 +42,4 @@ EXPOSE $SERVER_PORT/tcp
 EXPOSE $SERVER_PORT/udp
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["-s","0.0.0.0","-p","$SERVER_PORT","-k","$PASSWORD","-m","$METHOD","-o":"$OBFS","-O", "$PROTOCOL"]
+CMD ["-s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL"]
