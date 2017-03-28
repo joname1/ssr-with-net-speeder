@@ -32,11 +32,14 @@ RUN chmod +x /usr/local/bin/net_speeder
 RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git /src/ssr
 
 COPY start.sh /usr/local/bin/
+COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 80
 EXPOSE 22
 EXPOSE $SERVER_PORT/tcp
 EXPOSE $SERVER_PORT/udp
 
-CMD    ["/usr/local/bin/start.sh",$SERVER_PORT,$PASSWORD,$METHOD,$PROTOCOL,$OBFS]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["-s","0.0.0.0","-p","$SERVER_PORT","-k","$PASSWORD","-m","$METHOD","-o":"$OBFS","-O", "$PROTOCOL"]
