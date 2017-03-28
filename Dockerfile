@@ -21,6 +21,8 @@ RUN sh build.sh
 RUN mv net_speeder /usr/local/bin/
 RUN chmod +x /usr/local/bin/net_speeder
 
+RUN git clone -b manyuser https://github.com/breakwa11/shadowsocks.git /src/ssr
+
 COPY start.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start.sh
 
