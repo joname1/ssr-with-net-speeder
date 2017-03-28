@@ -1,5 +1,5 @@
 FROM       ubuntu:14.04
-MAINTAINER Aleksandar Diklic "https://github.com/rastasheep"
+MAINTAINER malaohu<tua@live.cn>
 
 RUN apt-get update
 #ssh
@@ -8,7 +8,6 @@ RUN mkdir /var/run/sshd
 RUN echo 'root:root' |chpasswd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-
 
 RUN apt-get install -y python python-pip python-m2crypto libnet1-dev libpcap0.8-dev git gcc && \
 apt-get clean
@@ -25,6 +24,9 @@ RUN chmod +x /usr/local/bin/net_speeder
 COPY start.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start.sh
 
+EXPOSE 80
 EXPOSE 22
+EXPOSE $SERVER_PORT/tcp
+EXPOSE $SERVER_PORT/udp
 
 CMD    ["/usr/local/bin/start.sh"]
