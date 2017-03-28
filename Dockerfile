@@ -29,10 +29,7 @@ COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-EXPOSE 80
 EXPOSE 22
-EXPOSE $SERVER_PORT/tcp
-EXPOSE $SERVER_PORT/udp
 
 RUN echo "Start Info : -s 0.0.0.0 -p $SERVER_PORT -k $PASSWORD -m $METHOD -o $OBFS -O $PROTOCOL" >> /src/log.log
 
